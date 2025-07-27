@@ -20,7 +20,7 @@
             color: #e2e8f0; /* Tailwind gray-200 */
             padding: 1rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba{0, 0, 0, 0.1};
             max-width: 48rem; /* Equivalent to max-w-2xl */
             margin: 2rem auto;
         }
@@ -231,16 +231,21 @@
 
                 Dane dotyczące problemów z UMPIRE:
                 - Problemy z logowaniem lub dostępem do panelu UMPIRE (CMS):
-                    - Jeśli komunikat o błędzie: Sprawdź poprawność danych (login, hasło, wielkość liter, CAPS LOCK). Reset hasła (kontakt z administratorem lub WICKET). Konto zablokowane (odczekaj 15-30 min, kontakt z administratorem). Link do Jira: LINK_DO_JIRA_FORMULARZA_LOGIN_UMPIRE.
-                    - Jeśli strona nie reaguje/odświeża się: Wyczyść pamięć podręczną (cache) i ciasteczka (cookies) przeglądarki (LINK_DO_INSTRUKCJI_CZYSZCZENIA_CACHE). Spróbuj w trybie incognito/prywatnym. Spróbuj innej przeglądarki lub urządzenia. Link do Jira: LINK_DO_JIRA_FORMULARZA_LOGIN_UMPIRE_NO_RESPONSE.
+                    - Jeśli komunikat o błędzie: Sprawdź poprawność danych (login, hasło, wielkość liter, CAPS LOCK). Reset hasła (kontakt z administratorem lub WICKET). Konto zablokowane (odczekaj 15-30 min, kontakt z administratorem).
+                    - Jeśli strona nie reaguje/odświeża się: Wyczyść pamięć podręczną (cache) i ciasteczka (cookies) przeglądarki. Spróbuj w trybie incognito/prywatnym. Spróbuj innej przeglądarki lub urządzenia.
                 - Problemy z dodawaniem lub edycją treści (Artykuły, Wydarzenia, Profile):
-                    - Jeśli widzisz przycisk, ale nic się nie dzieje/błąd: Brak reakcji (wyczyść cache, inna przeglądarka). Błąd (jaki komunikat, zrzut ekranu). Link do Jira: LINK_DO_JIRA_FORMULARZA_ADD_EDIT_CONTENT_UMPIRE.
-                    - Jeśli nie widzisz przycisku: Sprawdź uprawnienia w CMS (redaktor, administrator). Kontakt z administratorem strony. Link do Jira: LINK_DO_JIRA_FORMULARZA_MISSING_BUTTON_UMPIRE.
+                    - Jeśli widzisz przycisk, ale nic się nie dzieje/błąd: Brak reakcji (wyczyść cache, inna przeglądarka). Błąd (jaki komunikat, zrzut ekranu).
+                    - Jeśli nie widzisz przycisku: Sprawdź uprawnienia w CMS (redaktor, administrator). Kontakt z administratorem strony.
                 - Problemy z wyświetlaniem zdjęć lub multimediów w UMPIRE:
-                    - Jeśli wszystkie obrazy/multimedia nie wyświetlają się/są uszkodzone: Sprawdź połączenie internetowe. Wyczyść cache. Sprawdź ładowanie innych elementów strony. Link do Jira: LINK_DO_JIRA_FORMULARZA_MEDIA_DISPLAY_UMPIRE_GENERAL.
-                    - Jeśli problem dotyczy tylko konkretnych obrazów/multimediów: Sprawdź w Bibliotece Mediów (widoczność, uszkodzenia, format, rozmiar). Sprawdź przypisanie. Spróbuj przesłać ponownie. Link do Jira: LINK_DO_JIRA_FORMULARZA_MEDIA_DISPLAY_UMPIRE_SPECIFIC.
+                    - Jeśli wszystkie obrazy/multimedia nie wyświetlają się/są uszkodzone: Sprawdź połączenie internetowe. Wyczyść cache. Sprawdź ładowanie innych elementów strony.
+                    - Jeśli problem dotyczy tylko konkretnych obrazów/multimediów: Sprawdź w Bibliotece Mediów (widoczność, uszkodzenia, format, rozmiar). Sprawdź przypisanie. Spróbuj przesłać ponownie.
                 - Inne problemy z platformą UMPIRE:
-                    - Jeśli żaden z powyższych tematów nie odpowiada: Kontakt z supportem (LINK_DO_OGÓLNEGO_JIRA_SUPPORT_UMPIRE). Przejrzyj całą bazę wiedzy (LINK_DO_GŁÓWNEJ_STRONY_GITBOOKA_UMPIRE).
+                    - Jeśli żaden z powyższych tematów nie odpowiada: Kontakt z supportem.
+
+                Dane kontaktowe supportu:
+                Email: support@tisagroup.ch
+                Portal: support.tisagroup.ch
+                Telefon: +48 22 307 92 83
 
                 Odpowiedź powinna być zwięzła i zawierać tylko kroki rozwiązywania problemu lub dalsze pytania. Na końcu zawsze zaproponuj powrót do głównych opcji lub zgłoszenie problemu, jeśli nie ma rozwiązania.
                 `;
@@ -267,7 +272,7 @@
                 messages.push({ sender: 'bot', text: botResponseText });
                 options = [
                     'Zacznij od nowa',
-                    'Zgłoś problem do Jira (jeśli nie rozwiązano)'
+                    'Zgłoś problem do supportu' // Changed option text
                 ];
 
             } catch (error) {
@@ -275,7 +280,7 @@
                 messages.push({ sender: 'bot', text: 'Przepraszam, wystąpił błąd podczas komunikacji z asystentem AI. Spróbuj ponownie.' });
                 options = [
                     'Zacznij od nowa',
-                    'Zgłoś problem do Jira (jeśli nie rozwiązano)'
+                    'Zgłoś problem do supportu' // Changed option text
                 ];
             } finally {
                 isLoading = false;
@@ -303,6 +308,10 @@
 3.  **Podjęte kroki:** Jakie kroki diagnostyczne użytkownik już podjął (na podstawie konwersacji).
 4.  **Komunikaty o błędach:** Jeśli występowały, proszę je uwzględnić.
 5.  **Platforma:** UMPIRE.
+Dane kontaktowe supportu:
+Email: support@tisagroup.ch
+Portal: support.tisagroup.ch
+Telefon: +48 22 307 92 83
 Konwersacja:
 ${chatHistoryFormatted}
 `;
@@ -325,10 +334,10 @@ ${chatHistoryFormatted}
                     jiraDescription = result.candidates[0].content.parts[0].text;
                 }
 
-                messages.push({ sender: 'bot', text: `Oto propozycja opisu zgłoszenia do Jira:<br/><br/><pre class="bg-gray-800 p-3 rounded-md overflow-x-auto text-sm">${jiraDescription}</pre><br/>Pamiętaj, aby zweryfikować i uzupełnić opis przed wysłaniem.` });
+                messages.push({ sender: 'bot', text: `Oto propozycja opisu zgłoszenia do Jira:<br/><br/><pre class="bg-gray-800 p-3 rounded-md overflow-x-auto text-sm">${jiraDescription}</pre><br/>Pamiętaj, aby zweryfikować i uzupełnić opis przed wysłaniem. Możesz skontaktować się z nami bezpośrednio:<br/>Email: support@tisagroup.ch<br/>Portal: support.tisagroup.ch<br/>Telefon: +48 22 307 92 83` });
                 options = [
                     'Zacznij od nowa',
-                    'Zgłoś problem do Jira (jeśli nie rozwiązano)'
+                    'Zgłoś problem do supportu' // Changed option text
                 ];
 
             } catch (error) {
@@ -336,7 +345,7 @@ ${chatHistoryFormatted}
                 messages.push({ sender: 'bot', text: 'Przepraszam, wystąpił błąd podczas generowania opisu zgłoszenia. Spróbuj ponownie.' });
                 options = [
                     'Zacznij od nowa',
-                    'Zgłoś problem do Jira (jeśli nie rozwiązano)'
+                    'Zgłoś problem do supportu' // Changed option text
                 ];
             } finally {
                 isLoading = false;
@@ -352,10 +361,10 @@ ${chatHistoryFormatted}
         const handleOptionClick = (optionText) => {
             if (optionText === 'Zacznij od nowa') {
                 initializeChat(); // Reset chat
-            } else if (optionText === 'Zgłoś problem do Jira (jeśli nie rozwiązano)') {
+            } else if (optionText === 'Zgłoś problem do supportu') { // Changed option text
                 messages.push({ sender: 'user', text: optionText });
-                messages.push({ sender: 'bot', text: 'Proszę, użyj poniższego linku, aby zgłosić problem w Jira. Pamiętaj o podaniu wszystkich szczegółów, w tym kroków, które już podjąłeś: [Zgłoś ogólny problem w Jira](LINK_DO_OGÓLNEGO_JIRA_SUPPORT_UMPIRE)' });
-                options = []; // No more options after directing to Jira
+                messages.push({ sender: 'bot', text: 'Proszę, skontaktuj się z nami bezpośrednio:<br/>Email: support@tisagroup.ch<br/>Portal: support.tisagroup.ch<br/>Telefon: +48 22 307 92 83<br/>Pamiętaj o podaniu wszystkich szczegółów, w tym kroków, które już podjąłeś.' });
+                options = []; // No more options after directing to support
                 renderMessages();
                 renderOptions();
             } else if (optionText === '✨ Wygeneruj opis zgłoszenia do Jira') {
